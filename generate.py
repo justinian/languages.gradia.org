@@ -41,14 +41,19 @@ def write_info_file(languages, output):
 def build_pages(pages, templates, output, ctx):
     from glob import glob
     from jinja2 import Environment, FileSystemLoader, select_autoescape
+    from os import makedirs
+    from pathlib import Path
 
     env = Environment(
         loader=FileSystemLoader("templates"),
         autoescape=select_autoescape())
 
-    for f in glob('**.html', root_dir=pages, recursive=True):
-        logging.info("Rendering %s", f)
-        with open(pages / f, "r") as infile, open(output / f, "w") as outfile:
+    for f in glob(str(pages / '**.html'), recursive=True):
+        infilename = Path(f).relative_to(pages)
+        outfilename = output / infilename
+        logging.info("Rendering %s", outfilename)
+        makedirs(outfilename.parent, exist_ok=True)
+        with open(f, "r") as infile, open(outfilename, "w") as outfile:
             template = env.from_string(infile.read())
             outfile.write(template.render(ctx))
 
@@ -80,7 +85,7 @@ def build_site(root, output):
 
 @click.command
 @click.argument("output")
-def generate(output):
+def generate(output="public"):
     from pathlib import Path
     logging.basicConfig(
         format = '%(asctime)s %(levelname)8s  %(message)s',
