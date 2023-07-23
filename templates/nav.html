@@ -1,0 +1,34 @@
+<div class="card sidebar">
+    <h1 class="site-title">Languages of Gradia</h1>
+    <ul class="language-nav">
+        <li>
+            <a class="language-nav-header" href="/">Home</a>
+        </li>
+
+        {% for name, lang in languages.items() %}
+        <li>
+            <span class="language-nav-header">{{ name|capitalize }}</span>
+            <ul>
+                <li><a href="/dict.html?lang={{ name }}">Dictionary</a></li>
+                <li><a href="#">Grammar</a></li>
+            </ul>
+        </li>
+        {% endfor %}
+
+        <li>
+            <span class="language-nav-header">Kankhri</span>
+            <ul>
+                <li><a href="#">Dictionary</a></li>
+                <li><a href="#">Grammar</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <span class="language-nav-header">Kankhri</span>
+            <ul>
+                <li><a href="#">Dictionary</a></li>
+                <li><a href="#">Grammar</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>

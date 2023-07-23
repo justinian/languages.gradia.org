@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1 class="page-title">Languages of Gradia</h1>
+
+    <section>
+        This site collects information on the languages that have been contstructed
+        for our fantasy setting, <a href="https://gradia.org">Gradia</a>.
+    </section>
+
+    {% for name, lang in languages.items() %}
+    <section class="language-section">
+        <h2 class="language-title">{{ name|capitalize }}</h2>
+        <div><a href="/dict.html?lang={{ name }}">dictionary</a> | <a href="#">grammar</a></div>
+        <p>{{ lang.description }}</p>
+    </section>
+    {% endfor %}
+
+{% endblock %}

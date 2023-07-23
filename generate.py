@@ -17,20 +17,40 @@ def parse_dictionary(csvfile):
 
 def build_language(name, root, output):
     import shutil
-    from json import dump
+    from json import dump, load
     logging.info("Building language %s", name)
     shutil.copy(root / "info.json", output / "info.json")
+
+    info = {}
+    with open(root / "info.json", "r") as infofile:
+        info = load(infofile)
 
     words = parse_dictionary(root / f"{name}.csv")
     with open(output / "dict.json", "w") as outfile:
         dump(words, outfile)
 
+    return info
 
 def write_info_file(languages, output):
     from json import dump
     logging.info("Writing languages.json with %d entries", len(languages))
     with open(output / "languages.json", "w") as outfile:
         dump(languages, outfile)
+
+
+def build_pages(pages, templates, output, ctx):
+    from glob import glob
+    from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+    env = Environment(
+        loader=FileSystemLoader("templates"),
+        autoescape=select_autoescape())
+
+    for f in glob('**.html', root_dir=pages, recursive=True):
+        logging.info("Rendering %s", f)
+        with open(pages / f, "r") as infile, open(output / f, "w") as outfile:
+            template = env.from_string(infile.read())
+            outfile.write(template.render(ctx))
 
 
 def build_site(root, output):
@@ -42,13 +62,20 @@ def build_site(root, output):
     shutil.copytree(root / "static", output)
 
     lang_root = root / "languages"
-    languages = os.listdir(lang_root)
-    for lang in languages:
+    languages = {}
+    for lang in os.listdir(lang_root):
         lang_dir = output / "languages" / lang
         os.makedirs(lang_dir)
-        build_language(lang, lang_root / lang, lang_dir)
+        languages[lang] = \
+            build_language(lang, lang_root / lang, lang_dir)
 
-    write_info_file(languages, output)
+    build_pages(
+        root / "pages",
+        root / "templates",
+        output,
+        {
+            "languages": languages,
+        })
 
 
 @click.command
