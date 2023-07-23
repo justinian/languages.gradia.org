@@ -86,7 +86,7 @@
                         .innerHTML;
                     let renderNoResult = Handlebars.compile(noResultTemplate);
 
-                    fetch(`${lang}.json`)
+                    fetch(`/languages/${lang}/info.json`)
                         .then(resp => resp.json())
                         .then(data => {
                             header.innerHTML = renderHeader(data);
@@ -99,7 +99,7 @@
                     let renderWords = Handlebars.compile(wordTemplate);
 
                     let query = document.getElementById("query");
-                    const dict = initialize(`${lang}.dict.json`);
+                    const dict = initialize(`/languages/${lang}/dict.json`);
                     query.addEventListener("input", event => {
                         result.innerHTML = renderWords({words: dict.lookup(query.value)});
                     });
