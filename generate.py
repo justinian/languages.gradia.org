@@ -15,21 +15,22 @@ def parse_dictionary(csvfile):
         return [val for val in csv]
 
 
-def build_language(name, root, output):
+def build_language(lang, env, ctx):
     import shutil
-    from json import dump, load
-    logging.info("Building language %s", name)
+    from json import dump
+
+    root = lang["dir"]
+    output = lang["output"]
+    slug = lang["slug"]
+    logging.info("Building language %s", lang["name"])
+
     shutil.copy(root / "info.json", output / "info.json")
+    shutil.copy(root / f"{slug}.html", output / "grammar.html")
 
-    info = {}
-    with open(root / "info.json", "r") as infofile:
-        info = load(infofile)
-
-    words = parse_dictionary(root / f"{name}.csv")
+    words = parse_dictionary(root / f"{slug}.csv")
     with open(output / "dict.json", "w") as outfile:
         dump(words, outfile)
 
-    return info
 
 def write_info_file(languages, output):
     from json import dump
@@ -38,15 +39,10 @@ def write_info_file(languages, output):
         dump(languages, outfile)
 
 
-def build_pages(pages, templates, output, ctx):
+def build_pages(pages, output, env, ctx):
     from glob import glob
-    from jinja2 import Environment, FileSystemLoader, select_autoescape
     from os import makedirs
     from pathlib import Path
-
-    env = Environment(
-        loader=FileSystemLoader("templates"),
-        autoescape=select_autoescape())
 
     for f in glob(str(pages / '**.html'), recursive=True):
         infilename = Path(f).relative_to(pages)
@@ -58,26 +54,48 @@ def build_pages(pages, templates, output, ctx):
             outfile.write(template.render(ctx))
 
 
-def build_site(root, output):
+def find_languages(root, output):
     import os
+    from json import load
+
+    infos = {}
+    for lang in os.listdir(root):
+        lang_dir = root / lang
+        lang_out = output / lang
+        os.makedirs(lang_out)
+
+        with open(lang_dir / "info.json", "r") as infofile:
+            info = load(infofile)
+            info["dir"] = lang_dir
+            info["output"] = lang_out
+            infos[info["slug"]] = info
+
+    return infos
+
+
+def build_site(root, output):
     import shutil
+    from jinja2 import Environment, FileSystemLoader, select_autoescape
 
     logging.info("Installing static content into %s", output)
     shutil.rmtree(output, ignore_errors=True)
     shutil.copytree(root / "static", output)
 
-    lang_root = root / "languages"
-    languages = {}
-    for lang in os.listdir(lang_root):
-        lang_dir = output / "languages" / lang
-        os.makedirs(lang_dir)
-        languages[lang] = \
-            build_language(lang, lang_root / lang, lang_dir)
+    languages = find_languages(
+        root / "languages",
+        output / "languages")
+
+    env = Environment(
+        loader=FileSystemLoader(root / "templates"),
+        autoescape=select_autoescape())
+
+    for lang in languages.values():
+        build_language(lang, env, dict(languages=languages))
 
     build_pages(
         root / "pages",
-        root / "templates",
         output,
+        env,
         {
             "languages": languages,
         })

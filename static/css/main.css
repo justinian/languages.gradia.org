@@ -1,5 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Noto+Sans&display=swap');
+
 :root {
     --title-color: #3e5974;
+    --color-primary: #469;
+    --border-radius: 8px;
+}
+
+body {
+    background-image: url(https://source.unsplash.com/A8IbUXHoxxQ);
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: "Cabin", sans-serif;
 }
 
 .site-title {
@@ -11,12 +22,6 @@
     color: var(--title-color);
     font-weight: bold;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-image: url(https://source.unsplash.com/A8IbUXHoxxQ);
-    background-size: cover;
-    background-attachment: fixed;
 }
 
 .sidebar {
@@ -53,6 +58,7 @@ body {
 
 .card {
     margin-top: 2rem;
+    border-radius: var(--border-radius);
 }
 
 .language-nav-header {

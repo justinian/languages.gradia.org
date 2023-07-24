@@ -1,0 +1,66 @@
+
+table, td, tr, th {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    font-family: "Noto Sans", sans-serif;
+    font-size: small;
+}
+
+th, td {
+    padding: 5px;
+    vertical-align: center;
+}
+
+v-ipa {
+    color: #777;
+}
+
+v-sp {
+    color: #3384b0;
+    font-weight:bold;
+}
+
+v-pos {
+    color: #848484;
+    font-size: 15px;
+    font-style:italic;
+}
+
+.vl__vert-div {
+    color: #d7dde0;
+    font-weight:bold;
+}
+
+.vl__grammar-block {
+    box-shadow: 1px 1px 4px rgba(0,0,0,.2);
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    overflow: auto;
+    overflow-x: auto;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.vl__red-h2 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.vl__sample-sentence {
+    text-align: center;
+    font-weight: lighter;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.vl__morph-description{font-family:"Noto Sans",sans-serif;padding-bottom:5px}
+
+.vl__question{display: none;}
+
+.ql-size-large {
+  font-size: 1.5em;
+}
