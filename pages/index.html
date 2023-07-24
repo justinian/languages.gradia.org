@@ -11,7 +11,7 @@
     {% for name, lang in languages.items() %}
     <section class="language-section">
         <h2 class="language-title">{{ name|capitalize }}</h2>
-        <div><a href="/dict.html?lang={{ name }}">dictionary</a> | <a href="#">grammar</a></div>
+        <div><a href="/dict.html?lang={{ name }}">dictionary</a> | <a href="/grammar.html?lang={{ name }}">grammar</a></div>
         <p>{{ lang.description }}</p>
     </section>
     {% endfor %}
