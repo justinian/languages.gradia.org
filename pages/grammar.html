@@ -40,6 +40,10 @@
 
                 [...t.getElementsByClassName("vl__the-language-of")].forEach(e => {
                     e.classList.replace("vl__the-language-of", "page-title");
+                    
+                    // I prefer this wording for the title
+                    let title = e.textContent;
+                    e.textContent = title.replace("The Language of", "The") + " language";
                 });
 
                 let elems = [

@@ -2,7 +2,6 @@
 table, td, tr, th {
     border: 1px solid #ddd;
     border-collapse: collapse;
-    font-family: "Noto Sans", sans-serif;
     font-size: small;
 }
 

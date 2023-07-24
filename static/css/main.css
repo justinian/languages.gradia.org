@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Noto+Sans&display=swap');
-
 :root {
     --title-color: #3e5974;
     --color-primary: #469;
@@ -10,7 +8,6 @@ body {
     background-image: url(https://source.unsplash.com/A8IbUXHoxxQ);
     background-size: cover;
     background-attachment: fixed;
-    font-family: "Cabin", sans-serif;
 }
 
 .site-title {
