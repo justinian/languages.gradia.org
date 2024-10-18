@@ -1,0 +1,8 @@
+---
+pagination:
+  data: languages
+  size: 1
+  alias: lang
+permalink: "languages/{{ lang.slug }}/dict.json"
+---
+{{ lang.dict | dump | safe }}

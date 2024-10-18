@@ -23,7 +23,7 @@
         <main class="container">
             <div class="row">
                 <div class="col card">
-                    {% block content required %}{% endblock %}
+                    {% block content %}{% endblock %}
 
                     <section class="license">
                         <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="col-3">
-                    {% include 'nav.html' %}
+                    {% include "nav.njk" %}
                 </div>
             </div>
         </main>

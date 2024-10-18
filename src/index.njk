@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.njk" %}
 {% block content %}
 
     <h1 class="page-title">Languages of Gradia</h1>
@@ -8,10 +8,10 @@
         for our fantasy setting, <a href="https://gradia.org">Gradia</a>.
     </section>
 
-    {% for name, lang in languages.items() %}
+    {% for lang in languages %}
     <section class="language-section">
-        <h2 class="language-title">{{ name|capitalize }}</h2>
-        <div><a href="/dict.html?lang={{ name }}">dictionary</a> | <a href="/grammar.html?lang={{ name }}">grammar</a></div>
+        <h2 class="language-title">{{ lang.name }}</h2>
+        <div><a href="/dict.html?lang={{ lang.slug }}">dictionary</a> | <a href="/grammar?lang={{ lang.slug }}">grammar</a></div>
         <p>{{ lang.description }}</p>
     </section>
     {% endfor %}

@@ -5,12 +5,12 @@
             <a class="language-nav-header" href="/">Home</a>
         </li>
 
-        {% for name, lang in languages.items() %}
+        {% for lang in languages %}
         <li>
-            <span class="language-nav-header">{{ name|capitalize }}</span>
+            <span class="language-nav-header">{{ lang.name | capitalize }}</span>
             <ul>
-                <li><a href="/dict.html?lang={{ name }}">Dictionary</a></li>
-                <li><a href="/grammar.html?lang={{ name }}">Grammar</a></li>
+                <li><a href="/dict.html?lang={{ lang.name }}">Dictionary</a></li>
+                <li><a href="/grammar.html?lang={{ lang.name }}">Grammar</a></li>
             </ul>
         </li>
         {% endfor %}
