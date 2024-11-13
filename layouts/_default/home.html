@@ -14,10 +14,9 @@
 
     {{ range .Site.RegularPages.ByLinkTitle }}
     <section class="language-section">
-        <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-        {{ with .Summary }}
-            <p>{{ . }}</p>
-        {{ end }}
+        <h2>{{ .LinkTitle }}</h2>
+        {{ with .Summary }}{{ . }}{{ end }}
+        <div><a href="{{ .RelPermalink }}">Description</a> | <a href="{{ .RelPermalink }}#lexicon">Lexicon</a> | <a href="{{ .RelPermalink }}#generator">Generator</a></div>
     </section>
     {{ end }}
 

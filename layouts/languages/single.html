@@ -8,7 +8,7 @@
     <a href="#" id="tab-generator">Generator</a>
 </nav>
 
-<section id="section-description">
+<section id="section-description" hidden>
     {{ .Content }}
 </section>
 
@@ -95,8 +95,14 @@
     for(const tabname of tabnames) {
         const tab = document.getElementById(`tab-${tabname}`);
         tab.addEventListener("click", e => {
+            e.preventDefault();
             switchSection(tabname);
         });
     }
+
+    let startTab = document.location.hash.substring(1);
+    if (!tabnames.includes(startTab))
+        startTab = tabnames[0];
+    switchSection(startTab);
 </script>
 {{ end }}
