@@ -5,7 +5,7 @@
         <a href="/">Languages of Gradia & Zōayage</a>
       </li>
 
-      {{ range .Site.Pages }}
+      {{ range where site.RegularPages.ByLinkTitle "Section" "languages" }}
       <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
       {{ end }}
 
