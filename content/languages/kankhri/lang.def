@@ -1,0 +1,12 @@
+settings: random-rate=30
+
+F = m k l ʃ ʔ b h χ ʁ s j n t d p g z ʦ bn dv kl km kv st tm zm
+M = l χ j d ʁ n m ʃ h v ʔ t f s ts z p ʕ b g k ʁb ʃb ʃm ʃt fʃ gm jf jl kn kʁ lm mh mk mn mʁ mʔ mʦ nχʁ sχ tʁ vχ x zd ʃl ʃp ʦ χn χt
+L = m n ʁ l χ t d v ʃ j h f k ʦ g s ʔ
+V = a e i o u
+
+words: F?VM?VL F?VL FVV?L VMVL F?V VL
+
+reject: (..+)\1+ (..+).\1+
+reject: ^ʔ ^bn
+spelling: ʃ > sh; ʔ > '; χ > kh; ʁ > r; ʦ > tz; ʕ > x̂; j > y

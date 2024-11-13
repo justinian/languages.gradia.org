@@ -1,0 +1,19 @@
+settings: random-rate=50
+
+W = a ɯ o
+V = a i ɯ e o
+C = k g s z t m d n h b p j ɾ w
+K = ɲ ʧ kj gj ɾj mj hj pj bj ʤj
+N = n
+
+words: C?VC?V C?VKW KWC?V C?VC?VC?V C?VC?VKW C?VKWC?V KWC?VC?V
+
+reject: (w|y)(i|e) wo
+
+filter: ti > ʧi; si > ʃi; tɯ > tsɯ; hɯ > fɯ; zi > ʤi; za > tsa
+filter: np > mp; nb > mb; oɯ > oo;
+filter: aa > aː; ii > iː; ɯɯ > ɯː; ee > eː; oo > oː
+
+spelling: ɲ > ny; j > y; ɯ > u;
+spelling: ts > x; ɾ > r; ʧ > ch; ʃ > sh; ʤ > j
+spelling: aː > ā; iː > ī; uː > ū; eː > ē; oː > ō

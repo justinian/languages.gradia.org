@@ -1,0 +1,102 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+
+<nav class="tabs is-full">
+    <a href="#" class="active" id="tab-description">Description</a>
+    <a href="#" id="tab-lexicon">Lexicon</a>
+    <a href="#" id="tab-generator">Generator</a>
+</nav>
+
+<section id="section-description">
+    {{ .Content }}
+</section>
+
+<section id="section-lexicon" hidden>
+<div id="grid-wrapper"></div>
+</section>
+
+<section id="section-generator" hidden>
+    <div class="wordlist" id="generator-list"></div>
+    <a class="button primary" id="generate-button">Generate More</a>
+</section>
+
+<script type="module">
+    import { Grid, html } from "https://unpkg.com/gridjs?module";
+
+    new Grid({
+        columns: ["Word", "IPA", "️\u2139\ufe0f", "Definition"],
+        data: [
+                {{ with .Resources.Get "dict.csv" -}}
+                {{- with . | transform.Unmarshal -}}
+                {{- range after 1 . }}[ {{ range . }}"{{ . }}", {{ end }} ],
+                {{ end }}
+                {{- end -}}
+                {{- end }}
+        ],
+        /*
+        server: {
+            url: `/languages/${lang}/dict.json`,
+            then: data => data.map(word => 
+                [
+                    word.word,
+                    word.pronunciation,
+                    word.pos,
+                    word.definition,
+                ]),
+        },
+        */
+        search: true,
+        sort: true,
+    }).render(document.getElementById("grid-wrapper"));
+</script>
+
+<script type="lang.def" id="lang-def">
+{{ with .Resources.Get "lang.def" }}{{ .Content | safeHTML }}{{ end }}
+</script>
+
+<script type="module">
+    import { build_language } from '/js/lexx.js';
+    const langdef = document.getElementById("lang-def").innerHTML;
+    const lang = build_language(langdef);
+
+    const list = document.getElementById('generator-list');
+
+    const generate = () => {
+        const words = lang.generate(60);
+        list.innerHTML = words
+            .map(w => `<div>${w[0]} <span class="ipa">${w[1]}</span></div>`)
+            .join('\n');
+    }
+
+    const button = document.getElementById('generate-button');
+    button.addEventListener("click", generate);
+    generate();
+</script>
+
+<script type="module">
+    const tabnames = ["description", "lexicon", "generator"];
+    const switchSection = (target) => {
+        console.log("switchSection:", target);
+        for (const tabname of tabnames) {
+            const tab = document.getElementById(`tab-${tabname}`);
+            const section = document.getElementById(`section-${tabname}`);
+            if (tabname == target) {
+                tab.classList.add("active");
+                section.style.display = "block";
+            } else {
+                tab.classList.remove("active");
+                section.style.display = "none";
+
+            }
+        }
+    }
+
+    for(const tabname of tabnames) {
+        const tab = document.getElementById(`tab-${tabname}`);
+        tab.addEventListener("click", e => {
+            switchSection(tabname);
+        });
+    }
+</script>
+{{ end }}

@@ -1,0 +1,17 @@
+<nav>
+  <div>
+    <ul>
+      <li class="logo">
+        <a href="/">Languages of Gradia & Zōayage</a>
+      </li>
+
+      {{ range .Site.Pages }}
+      <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+      {{ end }}
+
+      <li>
+        <a href="https://github.com/justinian/languages.gradia.org"><img class="nav-icon" src="/images/github.svg"></a>
+      </li>
+    </ul>
+  </div>
+</nav>

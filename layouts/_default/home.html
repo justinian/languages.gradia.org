@@ -1,0 +1,24 @@
+{{ define "main" }}
+
+<h1>The Languages of Gradia & Zōayage</h1>
+
+<div class="card pull-right">
+  <img src="/images/quill.jpg" width="250"><br>
+  <small>Photo by <a href="https://unsplash.com/@chris_chow">Chris Chow</a> on
+  <a href="https://unsplash.com/photos/white-feather-on-black-metal-cup-YO8KdpMh0PY">Unsplash</a></small>
+</div>
+
+<section>
+    {{ .Content }}
+</section>
+
+    {{ range .Site.RegularPages.ByLinkTitle }}
+    <section class="language-section">
+        <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+        {{ with .Summary }}
+            <p>{{ . }}</p>
+        {{ end }}
+    </section>
+    {{ end }}
+
+{{ end }}

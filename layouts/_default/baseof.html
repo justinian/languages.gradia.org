@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Languages of Gradia</title>
+
+    <meta name="description" content="Vocabulary of the languages of the fantasy settings of Gradia and Zōayage">
+    <meta name="author" content="Justin C Miller">
+
+    <meta property="og:title" content="Languages of Gradia">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://languages.gradia.org">
+    <meta property="og:description" content="Vocabulary of the languages of the fantasy settings of Gradia and Zōayage">
+
+    <link rel="stylesheet" href="https://unpkg.com/chota@latest">
+    <link rel="stylesheet" href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+
+    <script>
+        window.goatcounter = {
+            path: function(p) { return "Languages" + p }
+        }
+    </script>
+    <script data-goatcounter="https://stats.gradia.org/count"
+            async src="//stats.gradia.org/count.js"></script>
+  </head>
+  <body>
+    {{ partial "nav.html" }}
+
+    <main>
+      <div>
+        {{ block "main" . }}{{ end }}
+      </div>
+    </main>
+
+    {{ partial "footer.html" }}
+  </body>
+</html>

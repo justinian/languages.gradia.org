@@ -1,0 +1,9 @@
+baseURL: 'https://languages.gradia.org/'
+languageCode: 'en-us'
+title: 'Languages of Gradia'
+
+removePathAccents: true
+cleanDestinationDir: true
+cascade:
+  build:
+    publishResources: false
