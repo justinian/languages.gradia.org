@@ -6,9 +6,10 @@ C = k s t n m h ɾ j p g b z d w
 K = ʧ kj ɲ ɾj mj hj gj pj bj ʤj
 N = n
 
-words: C?VC?V C?VC?VC?V KWC?V C?V C?VKWC?V KWC?VC?V C?VKW C?VC?VKW C?VC?VC?VC?V C?VN C?VC?VN
+words: C?VC?V C?VC?VC?V KWC?V C?VKWC?V KWC?VC?V C?VKW C?VC?VKW C?V C?VC?VC?VC?V C?VN C?VC?VN
 
-reject: (w|y)(i|e) wo
+reject: (w|y)(i|e) wo aaa iii ooo eee ɯɯɯ
+reject: aːa iːi ɯːɯ eːe oːo
 
 filter: ti > ʧi; si > ʃi; tɯ > tsɯ; hɯ > fɯ; zi > ʤi; za > tsa
 filter: np > mp; nb > mb; oɯ > oo;
